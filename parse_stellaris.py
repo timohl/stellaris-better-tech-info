@@ -1,7 +1,7 @@
 from config import Config
 from glob import glob
-import re
 from io import StringIO
+import re
 import unittest
 
 def _get_raw_tech_tier_area(file_str):
@@ -63,18 +63,43 @@ def get_tech_tier_area():
     file_str = _get_special_tiers_file_str(stellaris_dir)
     special_tiers = _get_special_tiers(file_str)
     table = _replace_special_tiers(table, special_tiers)
+    return table
 
+def _get_tier_definition_file_str(stellaris_dir):
+    with open(f"{stellaris_dir}/common/technology/tier/00_tier.txt", 'r') as f:
+        return f.read()
+
+def _get_tier_previously_unlocked(file_str):
+    table = {}
+    patterns = [
+            [r"^(\d) = \{", ""],
+            [r"previously_unlocked = (\d+)", ""],
+    ]
+    tier = ""
+    for line in StringIO(file_str):
+        if tier == "":
+            match = re.search(r"^([1|2|3|4|5]) = \{", line)
+            if match != None:
+                tier = match.group(1)
+        else:
+            match = re.search(r"previously_unlocked = (\d+)", line)
+            if match != None:
+                table[tier] = match.group(1)
+                tier = ""
     return table
 
 # Formatted as {int : int, ...}
 def get_tier_previously_unlocked():
-    table = {}
+    c = Config()
+    stellaris_dir = c.stellaris_dir
+    file_str = _get_tier_definition_file_str(stellaris_dir)
+    table = _get_tier_previously_unlocked(file_str)
     return table
 
 """
 Testing
 """
-class TestGetTechTierArea(unittest.TestCase):
+class TestParseStellaris(unittest.TestCase):
     def test_get_raw_tech_tier_area(self):
         file_str = """
 # ##################
@@ -193,6 +218,29 @@ tech_dark_matter_deflector = {
         }
         ret_table = _replace_special_tiers(table, special_tiers)
         self.assertEqual(ret_table,  ret_table_aim)
+
+    def test_get_tier_previously_unlocked(self):
+        file_str = """
+# The previously_unlocked-value decide ...
+0 = { # Tier 0
+}
+1 = { # Tier 1
+        previously_unlocked = 5
+}
+2 = { # Tier 2
+        previously_unlocked = 6
+}
+3 = { # Tier 3
+        previously_unlocked = 7
+}
+        """
+        table_aim = {
+                "1": "5",
+                "2": "6",
+                "3": "7",
+        }
+        table = _get_tier_previously_unlocked(file_str)
+        self.assertEqual(table, table_aim)
 
 if __name__ == '__main__':
     # Example usage
