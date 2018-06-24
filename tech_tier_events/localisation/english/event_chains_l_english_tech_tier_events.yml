@@ -1,0 +1,24 @@
+﻿l_english:
+
+####################################
+# Tech Tier Events Event Chain
+####################################
+
+tech_counter_chain_title:0 "Tech Counter"
+tech_counter_chain_desc:0 "Tech Counter counts your techs by tier and area"
+
+phy_tier_1_techs_researched:0 "§BPhysics Tier 1§!"
+phy_tier_2_techs_researched:0 "§BPhysics Tier 2§!"
+phy_tier_3_techs_researched:0 "§BPhysics Tier 3§!"
+phy_tier_4_techs_researched:0 "§BPhysics Tier 4§!"
+phy_tier_current:0 "§BReached Tier§!"
+soc_tier_1_techs_researched:0 "§GSociety Tier 1§!"
+soc_tier_2_techs_researched:0 "§GSociety Tier 2§!"
+soc_tier_3_techs_researched:0 "§GSociety Tier 3§!"
+soc_tier_4_techs_researched:0 "§GSociety Tier 4§!"
+soc_tier_current:0 "§GReached Tier§!"
+eng_tier_1_techs_researched:0 "§REngineering Tier 1§!"
+eng_tier_2_techs_researched:0 "§REngineering Tier 2§!"
+eng_tier_3_techs_researched:0 "§REngineering Tier 3§!"
+eng_tier_4_techs_researched:0 "§REngineering Tier 4§!"
+eng_tier_current:0 "§RReached Tier§!"

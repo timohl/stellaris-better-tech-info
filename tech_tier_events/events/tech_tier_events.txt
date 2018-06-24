@@ -1,0 +1,685 @@
+namespace = tier_counter
+
+# Start event chain
+country_event = {
+        id = tier_counter.1
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	trigger = {
+		NOT = {
+			has_event_chain = "engineering_tier_2_chain"
+		}
+	}
+
+	immediate = {
+		begin_event_chain = {
+			event_chain = "tech_counter_chain"
+			target = ROOT
+		}
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "phy_tier_current"
+			amount = 1
+		}
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "soc_tier_current"
+			amount = 1
+		}
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "eng_tier_current"
+			amount = 1
+		}
+	}
+}
+
+# Increment counter on new engineering tier 1 tech
+country_event = {
+	id = tier_counter.2
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			last_increased_tech = @techs_engineering_tier_1
+		}
+		has_event_chain = "tech_counter_chain"
+		NOT = {
+			has_completed_event_chain_counter = {
+				event_chain = "tech_counter_chain"
+				counter = "eng_tier_1_techs_researched"
+			}
+		}
+	}
+	immediate = {
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "eng_tier_1_techs_researched"
+			amount = 1
+		}
+		if = {
+			limit = {
+				has_completed_event_chain_counter = {
+					event_chain = "tech_counter_chain"
+					counter = "eng_tier_1_techs_researched"
+				}
+			}
+			country_event = { id = tier_counter.5 }
+		}
+	}
+}
+
+# Increment counter on new engineering tier 2 tech
+country_event = {
+	id = tier_counter.3
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			last_increased_tech = @techs_engineering_tier_2
+		}
+		has_event_chain = "tech_counter_chain"
+		NOT = {
+			has_completed_event_chain_counter = {
+				event_chain = "tech_counter_chain"
+				counter = "eng_tier_2_techs_researched"
+			}
+		}
+	}
+	immediate = {
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "eng_tier_2_techs_researched"
+			amount = 1
+		}
+		if = {
+			limit = {
+				has_completed_event_chain_counter = {
+					event_chain = "tech_counter_chain"
+					counter = "eng_tier_2_techs_researched"
+				}
+			}
+			country_event = { id = tier_counter.6 }
+		}
+	}
+}
+
+# Increment counter on new engineering tier 3 tech
+country_event = {
+	id = tier_counter.4
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			last_increased_tech = @techs_engineering_tier_3
+		}
+		has_event_chain = "tech_counter_chain"
+		NOT = {
+			has_completed_event_chain_counter = {
+				event_chain = "tech_counter_chain"
+				counter = "eng_tier_3_techs_researched"
+			}
+		}
+	}
+	immediate = {
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "eng_tier_3_techs_researched"
+			amount = 1
+		}
+		if = {
+			limit = {
+				has_completed_event_chain_counter = {
+					event_chain = "tech_counter_chain"
+					counter = "eng_tier_3_techs_researched"
+				}
+			}
+			country_event = { id = tier_counter.7 }
+		}
+	}
+}
+
+country_event = {
+        id = tier_counter.5
+	title = "Engineering Advancement Plans Acomplished"
+	desc = "Recent breakthroughs in engineering unlocked new possibilities of research. You can now research technologies of tier 2."
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "eng_tier_current"
+			amount = 1
+		}
+	}
+}
+
+country_event = {
+        id = tier_counter.6
+	title = "Engineering Advancement Plans Acomplished"
+	desc = "Recent breakthroughs in engineering unlocked new possibilities of research. You can now research technologies of tier 3."
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "eng_tier_current"
+			amount = 1
+		}
+	}
+}
+
+country_event = {
+        id = tier_counter.7
+	title = "Engineering Advancement Plans Acomplished"
+	desc = "Recent breakthroughs in engineering unlocked new possibilities of research. You can now research technologies of tier 4."
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "eng_tier_current"
+			amount = 1
+		}
+	}
+}
+
+# Increment counter on new society tier 1 tech
+country_event = {
+	id = tier_counter.8
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			last_increased_tech = @techs_society_tier_1
+		}
+		has_event_chain = "tech_counter_chain"
+		NOT = {
+			has_completed_event_chain_counter = {
+				event_chain = "tech_counter_chain"
+				counter = "soc_tier_1_techs_researched"
+			}
+		}
+	}
+	immediate = {
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "soc_tier_1_techs_researched"
+			amount = 1
+		}
+		if = {
+			limit = {
+				has_completed_event_chain_counter = {
+					event_chain = "tech_counter_chain"
+					counter = "soc_tier_1_techs_researched"
+				}
+			}
+			country_event = { id = tier_counter.11 }
+		}
+	}
+}
+
+# Increment counter on new society tier 2 tech
+country_event = {
+	id = tier_counter.9
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			last_increased_tech = @techs_society_tier_2
+		}
+		has_event_chain = "tech_counter_chain"
+		NOT = {
+			has_completed_event_chain_counter = {
+				event_chain = "tech_counter_chain"
+				counter = "soc_tier_2_techs_researched"
+			}
+		}
+	}
+	immediate = {
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "soc_tier_2_techs_researched"
+			amount = 1
+		}
+		if = {
+			limit = {
+				has_completed_event_chain_counter = {
+					event_chain = "tech_counter_chain"
+					counter = "soc_tier_2_techs_researched"
+				}
+			}
+			country_event = { id = tier_counter.12 }
+		}
+	}
+}
+
+# Increment counter on new society tier 3 tech
+country_event = {
+	id = tier_counter.10
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			last_increased_tech = @techs_society_tier_3
+		}
+		has_event_chain = "tech_counter_chain"
+		NOT = {
+			has_completed_event_chain_counter = {
+				event_chain = "tech_counter_chain"
+				counter = "soc_tier_3_techs_researched"
+			}
+		}
+	}
+	immediate = {
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "soc_tier_3_techs_researched"
+			amount = 1
+		}
+		if = {
+			limit = {
+				has_completed_event_chain_counter = {
+					event_chain = "tech_counter_chain"
+					counter = "soc_tier_3_techs_researched"
+				}
+			}
+			country_event = { id = tier_counter.13 }
+		}
+	}
+}
+
+country_event = {
+        id = tier_counter.11
+	title = "Society Advancement Plans Acomplished"
+	desc = "Recent breakthroughs in society unlocked new possibilities of research. You can now research technologies of tier 2."
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "soc_tier_current"
+			amount = 1
+		}
+	}
+}
+
+country_event = {
+        id = tier_counter.12
+	title = "Society Advancement Plans Acomplished"
+	desc = "Recent breakthroughs in society unlocked new possibilities of research. You can now research technologies of tier 3."
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "soc_tier_current"
+			amount = 1
+		}
+	}
+}
+
+country_event = {
+        id = tier_counter.13
+	title = "Society Advancement Plans Acomplished"
+	desc = "Recent breakthroughs in society unlocked new possibilities of research. You can now research technologies of tier 4."
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "soc_tier_current"
+			amount = 1
+		}
+	}
+}
+
+# Increment counter on new physics tier 1 tech
+country_event = {
+	id = tier_counter.14
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			last_increased_tech = @techs_physics_tier_1
+		}
+		has_event_chain = "tech_counter_chain"
+		NOT = {
+			has_completed_event_chain_counter = {
+				event_chain = "tech_counter_chain"
+				counter = "phy_tier_1_techs_researched"
+			}
+		}
+	}
+	immediate = {
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "phy_tier_1_techs_researched"
+			amount = 1
+		}
+		if = {
+			limit = {
+				has_completed_event_chain_counter = {
+					event_chain = "tech_counter_chain"
+					counter = "phy_tier_1_techs_researched"
+				}
+			}
+			country_event = { id = tier_counter.17 }
+		}
+	}
+}
+
+# Increment counter on new physics tier 2 tech
+country_event = {
+	id = tier_counter.15
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			last_increased_tech = @techs_physics_tier_2
+		}
+		has_event_chain = "tech_counter_chain"
+		NOT = {
+			has_completed_event_chain_counter = {
+				event_chain = "tech_counter_chain"
+				counter = "phy_tier_2_techs_researched"
+			}
+		}
+	}
+	immediate = {
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "phy_tier_2_techs_researched"
+			amount = 1
+		}
+		if = {
+			limit = {
+				has_completed_event_chain_counter = {
+					event_chain = "tech_counter_chain"
+					counter = "phy_tier_2_techs_researched"
+				}
+			}
+			country_event = { id = tier_counter.18 }
+		}
+	}
+}
+
+# Increment counter on new physics tier 3 tech
+country_event = {
+	id = tier_counter.16
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			last_increased_tech = @techs_physics_tier_3
+		}
+		has_event_chain = "tech_counter_chain"
+		NOT = {
+			has_completed_event_chain_counter = {
+				event_chain = "tech_counter_chain"
+				counter = "phy_tier_3_techs_researched"
+			}
+		}
+	}
+	immediate = {
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "phy_tier_3_techs_researched"
+			amount = 1
+		}
+		if = {
+			limit = {
+				has_completed_event_chain_counter = {
+					event_chain = "tech_counter_chain"
+					counter = "phy_tier_3_techs_researched"
+				}
+			}
+			country_event = { id = tier_counter.19 }
+		}
+	}
+}
+
+country_event = {
+        id = tier_counter.17
+	title = "Physics Advancement Plans Acomplished"
+	desc = "Recent breakthroughs in physics unlocked new possibilities of research. You can now research technologies of tier 2."
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "phy_tier_current"
+			amount = 1
+		}
+	}
+}
+
+country_event = {
+        id = tier_counter.18
+	title = "Physics Advancement Plans Acomplished"
+	desc = "Recent breakthroughs in physics unlocked new possibilities of research. You can now research technologies of tier 3."
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "phy_tier_current"
+			amount = 1
+		}
+	}
+}
+
+country_event = {
+        id = tier_counter.19
+	title = "Physics Advancement Plans Acomplished"
+	desc = "Recent breakthroughs in physics unlocked new possibilities of research. You can now research technologies of tier 4."
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "phy_tier_current"
+			amount = 1
+		}
+	}
+}
+
+# Increment counter on new engineering tier 4 tech
+country_event = {
+	id = tier_counter.20
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			last_increased_tech = @techs_engineering_tier_4
+		}
+		has_event_chain = "tech_counter_chain"
+		NOT = {
+			has_completed_event_chain_counter = {
+				event_chain = "tech_counter_chain"
+				counter = "eng_tier_4_techs_researched"
+			}
+		}
+	}
+	immediate = {
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "eng_tier_4_techs_researched"
+			amount = 1
+		}
+		if = {
+			limit = {
+				has_completed_event_chain_counter = {
+					event_chain = "tech_counter_chain"
+					counter = "eng_tier_4_techs_researched"
+				}
+			}
+			country_event = { id = tier_counter.23 }
+		}
+	}
+}
+
+# Increment counter on new society tier 4 tech
+country_event = {
+	id = tier_counter.21
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			last_increased_tech = @techs_society_tier_4
+		}
+		has_event_chain = "tech_counter_chain"
+		NOT = {
+			has_completed_event_chain_counter = {
+				event_chain = "tech_counter_chain"
+				counter = "soc_tier_4_techs_researched"
+			}
+		}
+	}
+	immediate = {
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "soc_tier_4_techs_researched"
+			amount = 1
+		}
+		if = {
+			limit = {
+				has_completed_event_chain_counter = {
+					event_chain = "tech_counter_chain"
+					counter = "soc_tier_4_techs_researched"
+				}
+			}
+			country_event = { id = tier_counter.24 }
+		}
+	}
+}
+
+# Increment counter on new physics tier 4 tech
+country_event = {
+	id = tier_counter.22
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			last_increased_tech = @techs_physics_tier_4
+		}
+		has_event_chain = "tech_counter_chain"
+		NOT = {
+			has_completed_event_chain_counter = {
+				event_chain = "tech_counter_chain"
+				counter = "phy_tier_4_techs_researched"
+			}
+		}
+	}
+	immediate = {
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "phy_tier_4_techs_researched"
+			amount = 1
+		}
+		if = {
+			limit = {
+				has_completed_event_chain_counter = {
+					event_chain = "tech_counter_chain"
+					counter = "phy_tier_4_techs_researched"
+				}
+			}
+			country_event = { id = tier_counter.25 }
+		}
+	}
+}
+
+country_event = {
+        id = tier_counter.23
+	title = "Engineering Advancement Plans Acomplished"
+	desc = "Recent breakthroughs in engineering unlocked new possibilities of research. You can now research technologies of tier 5."
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "eng_tier_current"
+			amount = 1
+		}
+	}
+}
+
+country_event = {
+        id = tier_counter.24
+	title = "Society Advancement Plans Acomplished"
+	desc = "Recent breakthroughs in society unlocked new possibilities of research. You can now research technologies of tier 5."
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "soc_tier_current"
+			amount = 1
+		}
+	}
+}
+
+country_event = {
+        id = tier_counter.25
+	title = "Physics Advancement Plans Acomplished"
+	desc = "Recent breakthroughs in physics unlocked new possibilities of research. You can now research technologies of tier 5."
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		add_event_chain_counter = {
+			event_chain = "tech_counter_chain"
+			counter = "phy_tier_current"
+			amount = 1
+		}
+	}
+}

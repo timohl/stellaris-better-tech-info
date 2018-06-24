@@ -1,0 +1,22 @@
+on_tech_increased = {
+	events = {
+		tier_counter.2
+		tier_counter.3
+		tier_counter.4
+		tier_counter.8
+		tier_counter.9
+		tier_counter.10
+		tier_counter.14
+		tier_counter.15
+		tier_counter.16
+		tier_counter.20
+		tier_counter.21
+		tier_counter.22
+	}
+}
+
+on_press_begin = {
+	events = {
+		tier_counter.1
+	}
+}

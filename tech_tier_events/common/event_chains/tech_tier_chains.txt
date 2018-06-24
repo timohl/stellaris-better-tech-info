@@ -1,0 +1,47 @@
+# tier2(6) tier3(6) tier4(6) tier5(6)
+tech_counter_chain = {
+	counter = {
+		phy_tier_1_techs_researched = {
+			max = 6
+		}
+		phy_tier_2_techs_researched = {
+			max = 6
+		}
+		phy_tier_3_techs_researched = {
+			max = 6
+		}
+		phy_tier_4_techs_researched = {
+			max = 6
+		}
+		phy_tier_current = {
+		}
+		soc_tier_1_techs_researched = {
+			max = 6
+		}
+		soc_tier_2_techs_researched = {
+			max = 6
+		}
+		soc_tier_3_techs_researched = {
+			max = 6
+		}
+		soc_tier_4_techs_researched = {
+			max = 6
+		}
+		soc_tier_current = {
+		}
+		eng_tier_1_techs_researched = {
+			max = 6
+		}
+		eng_tier_2_techs_researched = {
+			max = 6
+		}
+		eng_tier_3_techs_researched = {
+			max = 6
+		}
+		eng_tier_4_techs_researched = {
+			max = 6
+		}
+		eng_tier_current = {
+		}
+	}
+}
