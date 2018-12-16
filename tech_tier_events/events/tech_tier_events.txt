@@ -45,7 +45,7 @@ country_event = {
 
 	trigger = {
 		OR = {
-			last_increased_tech = @techs_engineering_tier_1
+			last_increased_tech = @techs_engineering_tier_1@
 		}
 		has_event_chain = "tech_counter_chain"
 		NOT = {
@@ -82,7 +82,7 @@ country_event = {
 
 	trigger = {
 		OR = {
-			last_increased_tech = @techs_engineering_tier_2
+			last_increased_tech = @techs_engineering_tier_2@
 		}
 		has_event_chain = "tech_counter_chain"
 		NOT = {
@@ -119,7 +119,7 @@ country_event = {
 
 	trigger = {
 		OR = {
-			last_increased_tech = @techs_engineering_tier_3
+			last_increased_tech = @techs_engineering_tier_3@
 		}
 		has_event_chain = "tech_counter_chain"
 		NOT = {
@@ -207,7 +207,7 @@ country_event = {
 
 	trigger = {
 		OR = {
-			last_increased_tech = @techs_society_tier_1
+			last_increased_tech = @techs_society_tier_1@
 		}
 		has_event_chain = "tech_counter_chain"
 		NOT = {
@@ -244,7 +244,7 @@ country_event = {
 
 	trigger = {
 		OR = {
-			last_increased_tech = @techs_society_tier_2
+			last_increased_tech = @techs_society_tier_2@
 		}
 		has_event_chain = "tech_counter_chain"
 		NOT = {
@@ -281,7 +281,7 @@ country_event = {
 
 	trigger = {
 		OR = {
-			last_increased_tech = @techs_society_tier_3
+			last_increased_tech = @techs_society_tier_3@
 		}
 		has_event_chain = "tech_counter_chain"
 		NOT = {
@@ -369,7 +369,7 @@ country_event = {
 
 	trigger = {
 		OR = {
-			last_increased_tech = @techs_physics_tier_1
+			last_increased_tech = @techs_physics_tier_1@
 		}
 		has_event_chain = "tech_counter_chain"
 		NOT = {
@@ -406,7 +406,7 @@ country_event = {
 
 	trigger = {
 		OR = {
-			last_increased_tech = @techs_physics_tier_2
+			last_increased_tech = @techs_physics_tier_2@
 		}
 		has_event_chain = "tech_counter_chain"
 		NOT = {
@@ -443,7 +443,7 @@ country_event = {
 
 	trigger = {
 		OR = {
-			last_increased_tech = @techs_physics_tier_3
+			last_increased_tech = @techs_physics_tier_3@
 		}
 		has_event_chain = "tech_counter_chain"
 		NOT = {
@@ -531,7 +531,7 @@ country_event = {
 
 	trigger = {
 		OR = {
-			last_increased_tech = @techs_engineering_tier_4
+			last_increased_tech = @techs_engineering_tier_4@
 		}
 		has_event_chain = "tech_counter_chain"
 		NOT = {
@@ -568,7 +568,7 @@ country_event = {
 
 	trigger = {
 		OR = {
-			last_increased_tech = @techs_society_tier_4
+			last_increased_tech = @techs_society_tier_4@
 		}
 		has_event_chain = "tech_counter_chain"
 		NOT = {
@@ -605,7 +605,7 @@ country_event = {
 
 	trigger = {
 		OR = {
-			last_increased_tech = @techs_physics_tier_4
+			last_increased_tech = @techs_physics_tier_4@
 		}
 		has_event_chain = "tech_counter_chain"
 		NOT = {

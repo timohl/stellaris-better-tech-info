@@ -101,12 +101,12 @@ def get_languages(stellaris_dir):
     languages = [re.search(r"localisation/(.+)/$", loc_dir).group(1) for loc_dir in loc_dirs]
     return languages
 
-def get_file_str(path):
-    with open(path, 'r', encoding="utf-8-sig", errors='strict') as f:
+def get_file_str(path, encoding="utf-8-sig"):
+    with open(path, 'r', encoding=encoding, errors='strict') as f:
         return f.read()
 
-def write_file(path, str):
-    with open(path, 'w', encoding="utf-8-sig", errors='strict', newline='\n') as f:
+def write_file(path, str, encoding="utf-8-sig", newline='\n'):
+    with open(path, 'w', encoding=encoding, errors='strict', newline=newline) as f:
         f.write(str)
 
 """
