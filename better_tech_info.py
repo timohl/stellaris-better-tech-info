@@ -1,5 +1,5 @@
 from config import Config
-from parse_stellaris import get_tech_tier_area, get_tier_previously_unlocked
+from parse_stellaris import get_tech_tier_area, get_tier_previously_unlocked, get_languages, get_file_str, write_file
 from glob import glob
 from io import StringIO
 import re
@@ -8,11 +8,6 @@ import os
 import shutil
 import codecs
 
-def _get_languages(stellaris_dir):
-    loc_dirs = glob(f"{stellaris_dir}/localisation/*/")
-    languages = [re.search(r"localisation/(.+)/$", loc_dir).group(1) for loc_dir in loc_dirs]
-    return languages
-
 def _create_dirs(mod_dir, language):
     os.makedirs(f"{mod_dir}/better_tech_info/localisation/{language}", exist_ok=True)
 
@@ -20,21 +15,35 @@ def _copy_meta_files(mod_dir):
     shutil.copyfile("better_tech_info.mod", f"{mod_dir}/better_tech_info.mod")
     shutil.copyfile("better_tech_info/thumbnail.jpg", f"{mod_dir}/better_tech_info/thumbnail.jpg")
 
+# TODO: Make get and write more generic and on all localisation files containing techs (detect techs in files).
+
 def _get_main_localisation_file_str(stellaris_dir, language):
-    with open(f"{stellaris_dir}/localisation/{language}/l_{language}.yml", 'r', encoding="utf-8-sig", errors='strict') as f:
-        return f.read()
+    return get_file_str(f"{stellaris_dir}/localisation/{language}/l_{language}.yml")
 
 def _get_tech_localisation_file_str(stellaris_dir, language):
-    with open(f"{stellaris_dir}/localisation/{language}/technology_l_{language}.yml", 'r', encoding="utf-8-sig", errors='strict') as f:
-        return f.read()
+    return get_file_str(f"{stellaris_dir}/localisation/{language}/technology_l_{language}.yml")
 
-def _write_tech_localisation_mod_file(mod_dir, language, better_tech_loc_str):
-    with open(f"{mod_dir}/better_tech_info/localisation/{language}/technology_l_{language}.yml", 'w', encoding="utf-8-sig", errors='strict', newline='\n') as f:
-        f.write(better_tech_loc_str)
+def _get_megacorp_localisation_file_str(stellaris_dir, language):
+    return get_file_str(f"{stellaris_dir}/localisation/{language}/megacorp_l_{language}.yml")
+
+def _get_apocalypse_localisation_file_str(stellaris_dir, language):
+    return get_file_str(f"{stellaris_dir}/localisation/{language}/apocalypse_l_{language}.yml")
+
+def _write_file(path, str):
+    with open(path, 'w', encoding="utf-8-sig", errors='strict', newline='\n') as f:
+        f.write(str)
 
 def _write_main_localisation_mod_file(mod_dir, language, better_main_loc_str):
-    with open(f"{mod_dir}/better_tech_info/localisation/{language}/better_tech_info_l_{language}.yml", 'w', encoding="utf-8-sig", errors='strict', newline='\n') as f:
-        f.write(better_main_loc_str)
+    write_file(f"{mod_dir}/better_tech_info/localisation/{language}/better_tech_info_l_{language}.yml", better_main_loc_str)
+
+def _write_tech_localisation_mod_file(mod_dir, language, better_tech_loc_str):
+    write_file(f"{mod_dir}/better_tech_info/localisation/{language}/technology_l_{language}.yml", better_tech_loc_str)
+
+def _write_megacorp_localisation_mod_file(mod_dir, language, better_megacorp_loc_str):
+    write_file(f"{mod_dir}/better_tech_info/localisation/{language}/megacorp_l_{language}.yml", better_megacorp_loc_str)
+
+def _write_apocalypse_localisation_mod_file(mod_dir, language, better_apocalypse_loc_str):
+    write_file(f"{mod_dir}/better_tech_info/localisation/{language}/apocalypse_l_{language}.yml", better_apocalypse_loc_str)
 
 def _get_tech_info_str(tech, table):
     return f"(Tier {table[tech][0]})"
@@ -71,20 +80,33 @@ def _insert_gerneral_tier_data(main_localisation_str, table):
 
 
 def generate():
+    print("Generate \"Better Tech Info\" mod.")
     c = Config()
     stellaris_dir = c.stellaris_dir
     mod_dir = c.mod_dir
-    languages = _get_languages(stellaris_dir)
+    languages = get_languages(stellaris_dir)
     table = get_tech_tier_area()
     tier_prev_table = get_tier_previously_unlocked()
     for language in languages:
-        tech_loc_str = _get_tech_localisation_file_str(stellaris_dir, language)
-        better_tech_loc_str = _insert_better_tech_info(tech_loc_str, table)
+        # Create localisation directory for language
         _create_dirs(mod_dir, language)
-        _write_tech_localisation_mod_file(mod_dir, language, better_tech_loc_str)
+        # Generate better_tech_info_l_{language}.yml from main localisation file
         main_loc_str = _get_main_localisation_file_str(stellaris_dir, language)
         better_main_loc_str = _insert_gerneral_tier_data(main_loc_str, tier_prev_table)
         _write_main_localisation_mod_file(mod_dir, language, better_main_loc_str)
+        # Generate technology_l_{language}.yml
+        tech_loc_str = _get_tech_localisation_file_str(stellaris_dir, language)
+        better_tech_loc_str = _insert_better_tech_info(tech_loc_str, table)
+        _write_tech_localisation_mod_file(mod_dir, language, better_tech_loc_str)
+        # Generate megacorp_l_{language}.yml
+        megacorp_loc_str = _get_megacorp_localisation_file_str(stellaris_dir, language)
+        better_megacorp_loc_str = _insert_better_tech_info(megacorp_loc_str, table)
+        _write_megacorp_localisation_mod_file(mod_dir, language, better_megacorp_loc_str)
+        # Generate apocalypse_l_{language}.yml
+        apocalypse_loc_str = _get_apocalypse_localisation_file_str(stellaris_dir, language)
+        better_apocalypse_loc_str = _insert_better_tech_info(apocalypse_loc_str, table)
+        _write_apocalypse_localisation_mod_file(mod_dir, language, better_apocalypse_loc_str)
+
     _copy_meta_files(mod_dir)
 
 
