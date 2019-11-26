@@ -59,6 +59,7 @@ def generate():
         _create_loc_dirs(mod_dir, language)
         _write_localisation_mod_file(mod_dir, language, generic_loc_str)
     _copy_file(mod_dir, "tech_tier_events.mod")
+    shutil.copyfile("tech_tier_events.mod", f"{mod_dir}/tech_tier_events/descriptor.mod")
     _copy_file(mod_dir, "tech_tier_events/thumbnail.jpg")
     _copy_file(mod_dir, "tech_tier_events/common/event_chains/tech_tier_chains.txt")
     _copy_file(mod_dir, "tech_tier_events/common/on_actions/tech_tier_on_actions.txt")

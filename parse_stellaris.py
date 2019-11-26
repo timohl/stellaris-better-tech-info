@@ -8,7 +8,7 @@ def _get_raw_tech_tier_area(file_str):
     table = {}
     patterns = {
         "tech": [r"(tech_.+) =", ""],
-        "tier": [r"tier = (0|1|2|3|4|5|@repeatableTechTier|@guardiantechtier|@fallentechtier)$", ""],
+        "tier": [r"tier = (0|1|2|3|4|5|@repeatableTechTier|@guardiantechtier|@fallentechtier|@horizontechtier)$", ""],
         "area": [r"area = (physics|engineering|society)", ""]
     }
     for line in StringIO(file_str):
@@ -34,7 +34,8 @@ def _get_special_tiers(file_str):
     special_tiers = {
             "@repeatableTechTier": "",
             "@guardiantechtier": "",
-            "@fallentechtier": ""
+            "@fallentechtier": "",
+            "@horizontechtier": ""
     }
     for tier in special_tiers:
         match = re.search(f"^{tier} = (0|1|2|3|4|5)", file_str, re.MULTILINE)

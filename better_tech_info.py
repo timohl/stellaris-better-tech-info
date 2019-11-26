@@ -13,6 +13,7 @@ def _create_dirs(mod_dir, language):
 
 def _copy_meta_files(mod_dir):
     shutil.copyfile("better_tech_info.mod", f"{mod_dir}/better_tech_info.mod")
+    shutil.copyfile("better_tech_info.mod", f"{mod_dir}/better_tech_info/descriptor.mod")
     shutil.copyfile("better_tech_info/thumbnail.jpg", f"{mod_dir}/better_tech_info/thumbnail.jpg")
 
 # TODO: Make get and write more generic and on all localisation files containing techs (detect techs in files).
@@ -29,6 +30,15 @@ def _get_megacorp_localisation_file_str(stellaris_dir, language):
 def _get_apocalypse_localisation_file_str(stellaris_dir, language):
     return get_file_str(f"{stellaris_dir}/localisation/{language}/apocalypse_l_{language}.yml")
 
+def _get_distant_stars_localisation_file_str(stellaris_dir, language):
+    return get_file_str(f"{stellaris_dir}/localisation/{language}/distant_stars_l_{language}.yml")
+
+def _get_ancient_relics_localisation_file_str(stellaris_dir, language):
+    return get_file_str(f"{stellaris_dir}/localisation/{language}/ancient_relics_l_{language}.yml")
+
+def _get_horizonsignal_localisation_file_str(stellaris_dir, language):
+    return get_file_str(f"{stellaris_dir}/localisation/{language}/horizonsignal_l_{language}.yml")
+
 def _write_file(path, str):
     with open(path, 'w', encoding="utf-8-sig", errors='strict', newline='\n') as f:
         f.write(str)
@@ -44,6 +54,15 @@ def _write_megacorp_localisation_mod_file(mod_dir, language, better_megacorp_loc
 
 def _write_apocalypse_localisation_mod_file(mod_dir, language, better_apocalypse_loc_str):
     write_file(f"{mod_dir}/better_tech_info/localisation/{language}/apocalypse_l_{language}.yml", better_apocalypse_loc_str)
+
+def _write_distant_stars_localisation_mod_file(mod_dir, language, better_distant_stars_loc_str):
+    write_file(f"{mod_dir}/better_tech_info/localisation/{language}/distant_stars_l_{language}.yml", better_distant_stars_loc_str)
+
+def _write_ancient_relics_localisation_mod_file(mod_dir, language, better_ancient_relics_loc_str):
+    write_file(f"{mod_dir}/better_tech_info/localisation/{language}/ancient_relics_l_{language}.yml", better_ancient_relics_loc_str)
+
+def _write_horizonsignal_localisation_mod_file(mod_dir, language, better_horizonsignal_loc_str):
+    write_file(f"{mod_dir}/better_tech_info/localisation/{language}/horizonsignal_l_{language}.yml", better_horizonsignal_loc_str)
 
 def _get_tech_info_str(tech, table):
     return f"(Tier {table[tech][0]})"
@@ -106,6 +125,18 @@ def generate():
         apocalypse_loc_str = _get_apocalypse_localisation_file_str(stellaris_dir, language)
         better_apocalypse_loc_str = _insert_better_tech_info(apocalypse_loc_str, table)
         _write_apocalypse_localisation_mod_file(mod_dir, language, better_apocalypse_loc_str)
+        # Generate distant_stars_l_{language}.yml
+        distant_stars_loc_str = _get_distant_stars_localisation_file_str(stellaris_dir, language)
+        better_distant_stars_loc_str = _insert_better_tech_info(distant_stars_loc_str, table)
+        _write_distant_stars_localisation_mod_file(mod_dir, language, better_distant_stars_loc_str)
+        # Generate ancient_relics_l_{language}.yml
+        ancient_relics_loc_str = _get_ancient_relics_localisation_file_str(stellaris_dir, language)
+        better_ancient_relics_loc_str = _insert_better_tech_info(ancient_relics_loc_str, table)
+        _write_ancient_relics_localisation_mod_file(mod_dir, language, better_ancient_relics_loc_str)
+        # Generate horizonsignal_l_{language}.yml
+        horizonsignal_loc_str = _get_horizonsignal_localisation_file_str(stellaris_dir, language)
+        better_horizonsignal_loc_str = _insert_better_tech_info(horizonsignal_loc_str, table)
+        _write_horizonsignal_localisation_mod_file(mod_dir, language, better_horizonsignal_loc_str)
 
     _copy_meta_files(mod_dir)
 
